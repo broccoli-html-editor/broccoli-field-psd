@@ -10,19 +10,19 @@ var twig = require("gulp-twig");//Twigテンプレートエンジン
 var browserify = require("gulp-browserify");//NodeJSのコードをブラウザ向けコードに変換
 var packageJson = require(__dirname+'/package.json');
 var _tasks = [
-	'broccoli-imageeditor-field.js',
+	'broccoli-psd-field.js',
 	'test/main.js'
 ];
 
-// broccoli-imageeditor-field.js (front側) を処理
-gulp.task("broccoli-imageeditor-field.js", function() {
-	gulp.src(["src/broccoli-imageeditor-field.js"])
+// broccoli-psd-field.js (front側) を処理
+gulp.task("broccoli-psd-field.js", function() {
+	gulp.src(["src/broccoli-psd-field.js"])
 		.pipe(plumber())
 		.pipe(browserify({}))
-		.pipe(concat('broccoli-imageeditor-field.js'))
+		.pipe(concat('broccoli-psd-field.js'))
 		.pipe(gulp.dest( './dist/' ))
 		.pipe(gulp.dest( './tests/testdata/htdocs/libs/' ))
-		.pipe(concat('broccoli-imageeditor-field.min.js'))
+		.pipe(concat('broccoli-psd-field.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest( './dist/' ))
 		.pipe(gulp.dest( './tests/testdata/htdocs/libs/' ))

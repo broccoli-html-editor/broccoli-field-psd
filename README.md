@@ -1,12 +1,12 @@
-# broccoli-imageeditor-field
+# broccoli-psd-field
 
-_broccoli-imageeditor-field_ は、 _broccoli-html-editor_ に カスタムフィールド "画像編集フィールド" を追加する拡張パッケージです。
+_broccoli-psd-field_ は、 _broccoli-html-editor_ に カスタムフィールド "画像編集フィールド" を追加する拡張パッケージです。
 
 ## インストール - Install
 
 ```
 $ npm install broccoli-html-editor --save
-$ npm install broccoli-imageeditor-field --save
+$ npm install broccoli-psd-field --save
 ```
 
 ※ モジュール化手順
@@ -14,11 +14,11 @@ $ npm install broccoli-imageeditor-field --save
 https://goo.gl/oRQ9Lo
 
 ※ 設定手順
-### broccoli-imageeditor-field install
+### broccoli-psd-field install
 - youngcorn/package.jsonに一行追加
 ```
 "dependencies": {
-  "broccoli-imageeditor-field": "git://github.com/pickles2/broccoli-imageeditor-field.git",
+  "broccoli-psd-field": "git://github.com/pickles2/broccoli-psd-field.git",
 }
 ```
 - npmモジュールダウンロード
@@ -33,8 +33,8 @@ https://goo.gl/oRQ9Lo
 ```
 ```js
 // broccoli-client (frontend) を処理
-gulp.src(["node_modules/broccoli-imageeditor-field/dist/*"])
-  .pipe(gulp.dest( './dist/libs/broccoli-imageeditor-field/dist/' ))
+gulp.src(["node_modules/broccoli-psd-field/dist/*"])
+  .pipe(gulp.dest( './dist/libs/broccoli-psd-field/dist/' ))
 ;
 ```
 
@@ -44,7 +44,7 @@ gulp.src(["node_modules/broccoli-imageeditor-field/dist/*"])
 ```
 ```js
 'customFields': {
-  'imageeditor': require('broccoli-imageeditor-field')
+  'psd': require('broccoli-psd-field')
 },
 ```
 
@@ -53,8 +53,8 @@ gulp.src(["node_modules/broccoli-imageeditor-field/dist/*"])
 # atom  src/project/themeEditor/editors/broccoli-html-editor/index.html.twig
 ```
 ```js
-<!--broccoli-imageeditor-field -->
-<script src="/libs/broccoli-imageeditor-field/dist/broccoli-imageeditor-field.js"></script>
+<!--broccoli-psd-field -->
+<script src="/libs/broccoli-psd-field/dist/broccoli-psd-field.js"></script>
 
 ```
 
@@ -64,13 +64,13 @@ gulp.src(["node_modules/broccoli-imageeditor-field/dist/*"])
 ```
 ```js
 'customFields': {
-  'imageeditor': window.BroccoliImageEditorField
+  'psd': window.BroccoliImageEditorField
 },
 ```
 
 - templateを追加
 ```
-# cp node_modules/broccoli-imageeditor-field/tests/testdata/modules1/dev/imageeditor #{プロジェクトフォルダ}/px-files/themes/broccoli/modules/images/
+# cp node_modules/broccoli-psd-field/tests/testdata/modules1/dev/psd #{プロジェクトフォルダ}/px-files/themes/broccoli/modules/images/
 ```
 
 

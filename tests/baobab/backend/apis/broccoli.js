@@ -25,7 +25,7 @@ module.exports = function( data, callback, main, socket ){
 					'pathResourceDir': '/editpage/index_files/resources/',
 					'realpathDataDir': path.resolve(__dirname, '../../../testdata/htdocs/editpage/index_files/guieditor.ignore/')+'/',
 					'customFields': {
-						'imageeditor': require('./../../../../libs/server.js')
+						'psd': require('./../../../../libs/server.js')
 					} ,
 					'bindTemplate': function(htmls, callback){
 						var fin = '';

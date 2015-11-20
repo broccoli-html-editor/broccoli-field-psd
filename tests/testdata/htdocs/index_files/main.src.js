@@ -37,7 +37,7 @@ window.main = new (function(){
 				'contents_area_selector': '[data-contents]',
 				'contents_bowl_name_by': 'data-contents',
 				'customFields': {
-					'imageeditor': require('./../../../../libs/client.js')
+					'psd': require('./../../../../libs/client.js')
 				},
 				'gpiBridge': function(api, options, callback){
 					// General Purpose Interface Bridge

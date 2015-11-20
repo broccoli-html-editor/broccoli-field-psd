@@ -7,7 +7,6 @@ module.exports = function(broccoli) {
   var json = require('json');
   var util = require('util');
   var _ = require('underscore');
-  var unoconv = require('unoconv2');
   var fs = require('fs-extra');
 
   var it79 = require('iterate79');
@@ -50,8 +49,11 @@ module.exports = function(broccoli) {
               it1.next(data);
               return;
             }else{
-              rtn.html = res.base64;
-              it1.next(data);
+              _resMgr.getResourceOriginalRealpath(rtn.resKeyHtml, function(orgPath) {
+                var html = fs.readFileSync(orgPath, 'utf-8');
+                rtn.html = html;
+                it1.next(data);
+              });
               return;
             }
           } else if (mode == 'canvas') {
@@ -61,8 +63,11 @@ module.exports = function(broccoli) {
               it1.next(data);
               return;
             }else{
-              rtn.html = res.base64;
-              it1.next(data);
+              _resMgr.getResourceOriginalRealpath(rtn.resKeyHtml, function(orgPath) {
+                var html = fs.readFileSync(orgPath, 'utf-8');
+                rtn.html = html;
+                it1.next(data);
+              });
               return;
             }
           }
@@ -86,7 +91,7 @@ module.exports = function(broccoli) {
     if (typeof(fieldData) === typeof({})) {
       rtn = fieldData;
     }
-    _resMgr.getResource(rtn.resKeyEditPng, function(res) {
+    _resMgr.getResource(rtn.resKeyPng, function(res) {
       rtn.PngPath = 'data:' + res.type + ';base64,' + res.base64;
       if (!res.base64) {
         // ↓ ダミーの Sample Image
@@ -110,16 +115,12 @@ module.exports = function(broccoli) {
     var rtn = fieldData;
     if (typeof(fieldData) !== typeof({})) {
       rtn = {
-        "resKey":'', // 元データ(psd,png,jpg...)
-				"path":'about:blank',
-				"resKeyOrgPng":'', // 元画像PNG 最大  <-PngPath
-				"OrgPngPath":'',
-				"resKeyEditPng":'', // 加工済みPNG
-				"EditPngPath":'',
-				"resKeyRect":'', // 切り取り座標
-				"resKeyEditData":'', // リンクデータ
-				"resKeyHtml":'', // htmlデータ
-				"HtmlPath":''
+        "resKey": '',
+        "path": 'about:blank',
+        "resKeyPng": '',
+        "PngPath": '',
+        "resKeyHtml": '',
+        "HtmlPath": ''
       };
     }
     return rtn;
@@ -149,76 +150,6 @@ module.exports = function(broccoli) {
           }
         });
 				break;
-      case 'convertPPTX':
-        var data = options.data;
-        var psdHeight = 0, psdWidth = 0;
-        log.debug('data', data);
-        it79.fnc(
-          data, [
-            // PPTXパス取得
-            function(it1, data) {
-              _resMgr.getResourceOriginalRealpath(data.resKey, function(OriginalPath) {
-                data.pptxPath = OriginalPath;
-                it1.next(data);
-                return;
-              });
-            },
-            // PNGキー,PNGパスを取得
-            function(it1, data) {
-              log.debug('data.resKeyOrgPng', data.resKeyOrgPng);
-              _resMgr.getResource(data.resKeyOrgPng, function(result) {
-                _resMgr.addResource(function(newResKeyOrgPng) {
-                  data.resKeyOrgPng = newResKeyOrgPng;
-                  // OrgPngPath
-                  _resMgr.getResourceOriginalRealpath(data.resKeyOrgPng, function(OriginalPath) {
-                    data.OrgPngPath = OriginalPath;
-                    it1.next(data);
-                    return;
-                  });
-                });
-              });
-            },
-            // PSD解析 ＆ PNG登録
-            function(it1, data) {
-              var file = data.pptxPath;
-              log.error('data.OrgPngPath', data.pptxPath);
-              // PNG作成
-              unoconv.convert(data.pptxPath, 'png', function (err, result) {
-                // result is returned as a Buffer
-                var base64PSD = result.toString('base64');
-                var resPngInfo = {};
-                data.resPngInfo = resPngInfo;
-                resPngInfo.isPrivateMaterial = false;
-                resPngInfo.size = 0;
-                resPngInfo.ext = "png";
-                resPngInfo.type = "image/png";
-                resPngInfo.alt = "PSDから作成されたPNG";
-                // log.debug(resPngInfo);
-                resPngInfo.base64 = (base64PSD).replace(new RegExp('^data\\:[^\\;]*\\;base64\\,'), '');
-                _resMgr.updateResource(data.resKeyOrgPng, resPngInfo, function() {
-                  _resMgr.getResourcePublicPath(data.resKeyOrgPng, function(publicPath) {
-                    data.pngPublicPath = publicPath;
-                    _resMgr.resetBinFromBase64(data.resKeyOrgPng, function() {
-                      log.help('data.resKeyOrgPng', data.resKeyOrgPng);
-                      it1.next(data);
-                      return;
-                    });
-                  });
-                });
-              });
-            },
-            function(it1, data) {
-              callback({
-                'resKeyOrgPng':data.resKeyOrgPng,
-                'PngPath':data.pngPublicPath,
-                'PngInfo':data.resPngInfo
-              });
-              it1.next(data);
-              return;
-            }
-          ]
-        );
-        break;
       case 'convertPSD':
         var data = options.data;
         var psdHeight = 0, psdWidth = 0;
@@ -243,9 +174,9 @@ module.exports = function(broccoli) {
                   _resMgr.getResourceOriginalRealpath(data.resKeyPng, function(OriginalPath) {
                     data.pngPath = OriginalPath;
                     it1.next(data);
-                    return;
                   });
                 });
+                return;
               });
             },
             // HTMLキー,HTMLパスを取得
@@ -260,9 +191,9 @@ module.exports = function(broccoli) {
                   _resMgr.getResourceOriginalRealpath(data.resKeyHtml, function(OriginalPath) {
                     data.HtmlPath = OriginalPath;
                     it1.next(data);
-                    return;
                   });
                 });
+                return;
               });
             },
             // PSD解析 ＆ PNG登録

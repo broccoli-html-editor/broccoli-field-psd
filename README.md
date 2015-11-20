@@ -4,7 +4,7 @@ _broccoli-psd-field_ は、 _broccoli-html-editor_ に カスタムフィール�
 
 ※ モジュール化手順
 下リンクの差分箇所を修正します  
-https://goo.gl/oRQ9Lo
+https://goo.gl/aOB8Jn
 
 ※ 設定手順
 ### broccoli-psd-field install

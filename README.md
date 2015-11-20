@@ -2,13 +2,6 @@
 
 _broccoli-psd-field_ は、 _broccoli-html-editor_ に カスタムフィールド "画像編集フィールド" を追加する拡張パッケージです。
 
-## インストール - Install
-
-```
-$ npm install broccoli-html-editor --save
-$ npm install broccoli-psd-field --save
-```
-
 ※ モジュール化手順
 下リンクの差分箇所を修正します  
 https://goo.gl/oRQ9Lo
@@ -64,7 +57,7 @@ gulp.src(["node_modules/broccoli-psd-field/dist/*"])
 ```
 ```js
 'customFields': {
-  'psd': window.BroccoliImageEditorField
+  'psd': window.BroccoliPSDField
 },
 ```
 
@@ -73,6 +66,10 @@ gulp.src(["node_modules/broccoli-psd-field/dist/*"])
 # cp node_modules/broccoli-psd-field/tests/testdata/modules1/dev/psd #{プロジェクトフォルダ}/px-files/themes/broccoli/modules/images/
 ```
 
+- 配置&実行
+```
+# gulp; gulp watch;
+```
 
 ## ライセンス - License
 

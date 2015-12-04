@@ -10,19 +10,20 @@ var twig = require("gulp-twig");//Twigテンプレートエンジン
 var browserify = require("gulp-browserify");//NodeJSのコードをブラウザ向けコードに変換
 var packageJson = require(__dirname+'/package.json');
 var _tasks = [
-	'broccoli-psd-field.js',
-	'test/main.js'
+	'broccoli-field-psd.js',
+	'test/main.js',
+	'copy',
 ];
 
-// broccoli-psd-field.js (front側) を処理
-gulp.task("broccoli-psd-field.js", function() {
-	gulp.src(["src/broccoli-psd-field.js"])
+// broccoli-field-psd.js (front側) を処理
+gulp.task("broccoli-field-psd.js", function() {
+	gulp.src(["src/broccoli-field-psd.js"])
 		.pipe(plumber())
 		.pipe(browserify({}))
-		.pipe(concat('broccoli-psd-field.js'))
+		.pipe(concat('broccoli-field-psd.js'))
 		.pipe(gulp.dest( './dist/' ))
 		.pipe(gulp.dest( './tests/testdata/htdocs/libs/' ))
-		.pipe(concat('broccoli-psd-field.min.js'))
+		.pipe(concat('broccoli-field-psd.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest( './dist/' ))
 		.pipe(gulp.dest( './tests/testdata/htdocs/libs/' ))
@@ -35,7 +36,23 @@ gulp.task("test/main.js", function() {
 		.pipe(plumber())
 		.pipe(browserify({}))
 		.pipe(concat('main.js'))
+		.pipe(uglify())
 		.pipe(gulp.dest( './tests/testdata/htdocs/index_files/' ))
+	;
+});
+
+gulp.task("copy", function() {
+	gulp.src(["./libs/css/**/*"])
+		.pipe(gulp.dest( './tests/testdata/htdocs/libs/psd/css/')) // テスト用
+		.pipe(gulp.dest( './dist/css/' )) // 本番用
+	;
+	gulp.src(["./libs/js/**/*"])
+		.pipe(gulp.dest( './tests/testdata/htdocs/libs/psd/js/')) // テスト用
+		.pipe(gulp.dest( './dist/js/' )) // 本番用
+	;
+	gulp.src(["./libs/img/**/*"])
+		.pipe(gulp.dest( './tests/testdata/htdocs/libs/psd/img/')) // テスト用
+		.pipe(gulp.dest( './dist/img/' )) // 本番用
 	;
 });
 

@@ -14778,7 +14778,7 @@ module.exports = phpjs;
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./build/npm":20}],22:[function(require,module,exports){
 (function(window){
-	window.BroccoliPSDField = require('../libs/client.js');
+	window.BroccoliFieldPSD = require('../libs/client.js');
 })(window);
 
 },{"../libs/client.js":1}]},{},[22])

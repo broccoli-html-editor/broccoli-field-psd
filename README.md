@@ -1,17 +1,17 @@
-# broccoli-psd-field
+# broccoli-field-psd
 
-_broccoli-psd-field_ は、 _broccoli-html-editor_ に カスタムフィールド "画像編集フィールド" を追加する拡張パッケージです。
+_broccoli-field-psd_ は、 _broccoli-html-editor_ に カスタムフィールド "画像編集フィールド" を追加する拡張パッケージです。
 
 ※ モジュール化手順
 下リンクの差分箇所を修正します  
 https://goo.gl/aOB8Jn
 
 ※ 設定手順
-### broccoli-psd-field install
+### broccoli-field-psd install
 - youngcorn/package.jsonに一行追加
 ```
 "dependencies": {
-  "broccoli-psd-field": "git://github.com/pickles2/broccoli-psd-field.git",
+  "broccoli-field-psd": "git://github.com/pickles2/broccoli-field-psd.git",
 }
 ```
 - npmモジュールダウンロード
@@ -26,8 +26,8 @@ https://goo.gl/aOB8Jn
 ```
 ```js
 // broccoli-client (frontend) を処理
-gulp.src(["node_modules/broccoli-psd-field/dist/*"])
-  .pipe(gulp.dest( './dist/libs/broccoli-psd-field/dist/' ))
+gulp.src(["node_modules/broccoli-field-psd/dist/*"])
+  .pipe(gulp.dest( './dist/{PATH_TO_YOUR_DIRECTORY}' ))
 ;
 ```
 
@@ -37,7 +37,7 @@ gulp.src(["node_modules/broccoli-psd-field/dist/*"])
 ```
 ```js
 'customFields': {
-  'psd': require('broccoli-psd-field')
+  'psd': require('broccoli-field-psd')
 },
 ```
 
@@ -46,8 +46,8 @@ gulp.src(["node_modules/broccoli-psd-field/dist/*"])
 # atom  src/project/themeEditor/editors/broccoli-html-editor/index.html.twig
 ```
 ```js
-<!--broccoli-psd-field -->
-<script src="/libs/broccoli-psd-field/dist/broccoli-psd-field.js"></script>
+<!--broccoli-field-psd -->
+<script src="/{PATH_TO_YOUR_DIRECTORY}broccoli-field-psd.js"></script>
 
 ```
 
@@ -57,13 +57,13 @@ gulp.src(["node_modules/broccoli-psd-field/dist/*"])
 ```
 ```js
 'customFields': {
-  'psd': window.BroccoliPSDField
+  'psd': window.BroccoliFieldPSD
 },
 ```
 
 - templateを追加
 ```
-# cp node_modules/broccoli-psd-field/tests/testdata/modules1/dev/psd #{プロジェクトフォルダ}/px-files/themes/broccoli/modules/images/
+# cp node_modules/broccoli-field-psd/tests/testdata/modules1/dev/psd #{プロジェクトフォルダ}/px-files/themes/broccoli/modules/images/
 ```
 
 - 配置&実行

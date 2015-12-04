@@ -1,3 +1,3 @@
 (function(window){
-	window.BroccoliPSDField = require('../libs/client.js');
+	window.BroccoliFieldPSD = require('../libs/client.js');
 })(window);

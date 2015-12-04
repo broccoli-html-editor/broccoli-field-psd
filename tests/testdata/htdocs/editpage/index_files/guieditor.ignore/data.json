@@ -16,6 +16,19 @@
         "renderer": "simplify"
        }
       }
+     },
+     {
+      "modId": "testMod1:dev/psd",
+      "fields": {
+       "image_src": {
+        "resKey": "048681360aeb8cd9b7ed775f3d2ce2d9",
+        "path": "./index_files/resources/href_test.psd",
+        "resKeyPng": "5e7de8d154ef6c55ee726585b2b4549d",
+        "PngPath": "./index_files/resources/5e7de8d154ef6c55ee726585b2b4549d.png",
+        "resKeyHtml": "4a8703a9320f36f07c677817f7b75fc3",
+        "HtmlPath": "./index_files/resources/4a8703a9320f36f07c677817f7b75fc3.html"
+       }
+      }
      }
     ]
    }
@@ -23,21 +36,7 @@
   "secondly": {
    "modId": "_sys/root",
    "fields": {
-    "main": [
-     {
-      "modId": "testMod1:dev/psd",
-      "fields": {
-       "image_src": {
-        "resKey": "610a9584e3b16ac6ad170a28ac78c5af",
-        "path": "./index_files/resources/href_test.psd",
-        "resKeyPng": "bf3723ab115c281b3d6303940f391724",
-        "PngPath": "./index_files/resources/bf3723ab115c281b3d6303940f391724.png",
-        "resKeyHtml": "c7967393507f36e4e009d971e9a17c58",
-        "HtmlPath": "./index_files/resources/c7967393507f36e4e009d971e9a17c58.html"
-       }
-      }
-     }
-    ]
+    "main": []
    }
   }
  }

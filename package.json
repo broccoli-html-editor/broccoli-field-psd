@@ -32,7 +32,7 @@
     "twig": "^0.8.2",
     "underscore": "^1.8.3",
 
-    "JSONPath": "git://github.com/s3u/JSONPath.git",
+    "jsonpath-plus": "git://github.com/s3u/JSONPath.git",
     "br-resouce": "git://github.com/m-prj/br-resouce.git",
     "filereader": "^0.10.3",
     "fs-extra": "^0.24.0",

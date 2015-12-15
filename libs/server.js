@@ -3,7 +3,7 @@ module.exports = function(broccoli) {
   require('m-util');
   var log = require('m-log');
   var PSD = require('psd');
-  var JSONPath = require('JSONPath');
+  var JSONPath = require('jsonpath-plus');
   var json = require('json');
   var util = require('util');
   var _ = require('underscore');
